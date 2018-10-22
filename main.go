@@ -1,22 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
-
 func main() {
-	bc := NewBlockchain()
-
-	bc.AddBlock("Send 1 BTC to kmollee")
-	bc.AddBlock("Send 2 more BTC to kmollee")
-
-	for _, block := range bc.blocks {
-		pow := NewProofOfWork(block)
-		fmt.Printf("Prev. hash: %x\n", block.PrevBlockHash)
-		fmt.Printf("Data: %s\n", block.Data)
-		fmt.Printf("Hash: %x\n", block.Hash)
-		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate()))
-		fmt.Println()
+	bc, err := NewBlockchain()
+	if err != nil {
+		panic(err.Error())
 	}
+	if bc != nil {
+		defer bc.db.Close()
+	}
+
+	cli := CLI{bc}
+	cli.Run()
 }

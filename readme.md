@@ -43,3 +43,13 @@ Bitcoin uses Hashcash, a Proof-of-Work algorithm that was initially developed to
 4. Check that the hash meets certain requirements.
     a. If it does, you’re done.
     b. If it doesn’t, increase the counter and repeat the steps 3 and 4.
+
+
+## CLI
+
+
+```
+./blockchain printchain
+
+./blockchain -data "Send 1 BTC to kmollee"
+```
